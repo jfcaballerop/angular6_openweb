@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'aweather';
-
+  sidebarMode = 'side';
 
   cityName = 'app';
 
   public search(cityName: string): void {
-    this.cityName = cityName
+    this.cityName = cityName;
   }
 
 }
