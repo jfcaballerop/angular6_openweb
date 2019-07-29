@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Weather } from '../weather/weather.model';
+import { Forecast } from '../weather/forecast.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Weather } from '../weather/weather.model';
 export class WeatherService {
 
   private urlApi = 'http://api.openweathermap.org/data/2.5/weather?q='
+  private urlApiForecast = 'http://api.openweathermap.org/data/2.5/forecast?q='
   private cityQuery = 'Madrid,es';
   private addSymbol = '&';
   private appID = 'APPID=98921063bab96b2553d78ba98642169a';
@@ -31,7 +33,15 @@ export class WeatherService {
 
     return this._http.get(url);
   }
-  public mapResult(result: any): Weather {
+
+  public getForecastInfo(cityName: string): Observable<any> {
+    const url = `${this.urlApiForecast}${this.cityQuery}${this.addSymbol}${this.appID}`;
+
+    return this._http.get(url);
+  }
+
+
+  public mapResult(result: any, resultForecast: any): Weather {
     const weatherInfo = new Weather();
 
     weatherInfo.city = `${result.name}, ${result.sys.country}`;
@@ -46,16 +56,17 @@ export class WeatherService {
     weatherInfo.temperature = result.main.temp;
     weatherInfo.winddirection = result.wind.deg;
     weatherInfo.windspeed = result.wind.speed;
-    // weatherInfo.forecasts = new Array<Forecast>();
-    // for (const forecast of result.item.forecast) {
-    //   const newForecast = new Forecast();
-    //   newForecast.date = forecast.date;
-    //   newForecast.day = forecast.day;
-    //   newForecast.maxTemperature = forecast.high;
-    //   newForecast.minTemperature = forecast.low;
-    //   newForecast.info = forecast.text;
-    //   weatherInfo.forecasts.push(newForecast);
-    // }
+
+    weatherInfo.forecasts = new Array<Forecast>();
+    for (const f of resultForecast.list) {
+      const newForecast = new Forecast();
+      newForecast.date = f.dt * 1000;
+      newForecast.day = f.dt_txt;
+      newForecast.maxTemperature = f.main.temp_max;
+      newForecast.minTemperature = f.main.temp_min;
+      newForecast.info = f.weather[0].description;
+      weatherInfo.forecasts.push(newForecast);
+    }
     return weatherInfo;
   }
 }

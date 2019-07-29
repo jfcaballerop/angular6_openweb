@@ -1,7 +1,7 @@
 
 
 export class Forecast {
-    date: string;
+    date: number;
     maxTemperature: number;
     minTemperature: number;
     day: string;
