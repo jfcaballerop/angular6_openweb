@@ -2,7 +2,7 @@ import { Forecast } from './forecast.model';
 
 export class Weather {
     city: string;
-    date: string;
+    date: number;
     temperature: number;
     info: string;
     windspeed: number;
@@ -14,7 +14,7 @@ export class Weather {
     sunrise: string;
     sunset: string;
 
-    forecast: Forecast;
+    forecasts: Array<Forecast>;
 
     get percentToSunset(): number {
         if (this.sunrise === undefined) {
@@ -43,13 +43,14 @@ export class Weather {
         return Math.round(percentToSunset);
     }
 
-    get hourMessure(): string {
-        if (this.date === undefined) {
-            return '';
-        }
-        const dateMeassure = new Date(this.date.split(', ')[1].substring(0, this.date.split(', ')[1].lastIndexOf(' ')));
-        return `${dateMeassure.getHours().toString().padStart(2, '0')}:${dateMeassure.getMinutes().toString().padStart(2, '0')} ${dateMeassure.getHours() > 14 ? 'pm' : 'am'}`;
-    }
+    // get hourMessure(): string {
+    //     if (this.date === undefined) {
+    //         return '';
+    //     }
+    //     const dateMeassure = new Date(this.date.split(', ')[1].substring(0, this.date.split(', ')[1].lastIndexOf(' ')));
+    //     return `${dateMeassure.getHours().toString().padStart(2, '0')}:${dateMeassure.getMinutes().toString().padStart(2, '0')} ${dateMeassure.getHours() > 14 ? 'pm' : 'am'}`;
+    // }
 
     constructor() { }
 }
+

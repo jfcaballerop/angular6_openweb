@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Forecast } from '../forecast.model';
+import { WeatherService } from 'src/app/services/weather.service';
 import { Weather } from '../weather.model';
 
 @Component({
@@ -11,39 +11,20 @@ export class WeatherCardComponent implements OnInit {
 
   weather: Weather = new Weather();
 
-  constructor() { }
+  constructor(
+    private _weatherService: WeatherService
+  ) { }
 
   ngOnInit() {
-    console.log('ngOnInit');
-
-    setTimeout(() => {
-      this.weather.city = 'Madrid';
-      this.weather.date = 'Tue, 01 May 2018 06:00 PM CEST';
-      this.weather.humidity = 32;
-      this.weather.info = 'Cloudy';
-      this.weather.maxtemperature = 90;
-      this.weather.mintemperature = 58;
-      this.weather.pressure = 1080;
-      this.weather.sunrise = '6:58 am';
-      this.weather.sunset = '11:40 pm';
-      this.weather.temperature = 80;
-      this.weather.winddirection = 270;
-      this.weather.windspeed = 26;
-      this.weather.forecast = new Forecast();
-      this.weather.forecast.date = '04 May 2018';
-      this.weather.forecast.day = 'Fri';
-      this.weather.forecast.info = 'Mostly Cloudy';
-      this.weather.forecast.maxTemperature = 88;
-      this.weather.forecast.minTemperature = 62;
-
-      console.log('call to server finalizado');
-      console.log(this.weather);
-    }, 3000);
-
-    setTimeout(() => {
-      this.weather.temperature = 40;
-    }, 20000);
-    console.log(this.weather);
+    this._weatherService.getWeatherInfo('Madrid, ES').subscribe(
+      data => {
+        if (data === undefined) {
+          alert('La ciudad buscada no existe');
+        } else {
+          this.weather = this._weatherService.mapResult(data);
+        }
+      }
+    );
   }
-}
 
+}

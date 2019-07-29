@@ -4,7 +4,7 @@
             <i class="wi wi-day-sunny"></i>
         </div>
         <mat-card-title>{{weather.city}}</mat-card-title>
-        <mat-card-subtitle>{{weather.date}}</mat-card-subtitle>
+        <mat-card-subtitle>{{weather.date | date: 'fullDate'}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div class="weather-card-content-info">
@@ -26,10 +26,10 @@
                 Soleado
             </mat-grid-tile>
             <mat-grid-tile class="weather-info-temp-up">
-                <i class="wi wi-direction-up"></i> {{weather.maxtemperature | celsius}} 
+                <i class="wi wi-direction-up"></i> {{weather.maxtemperature | celsius}}
             </mat-grid-tile>
             <mat-grid-tile class="weather-info-temp-down">
-                <i class="wi wi-direction-down"></i> {{weather.mintemperature | celsius}} 
+                <i class="wi wi-direction-down"></i> {{weather.mintemperature | celsius}}
             </mat-grid-tile>
         </mat-grid-list>
         <mat-grid-list cols="1" rowHeight="80px">
@@ -54,6 +54,6 @@
                 <i class="wi wi-sunset"></i>
             </mat-grid-tile>
         </mat-grid-list>
-        <app-weather-forecast [forecast]="weather.forecast"></app-weather-forecast>
+        <app-weather-forecast [forecasts]="weather.forecasts"></app-weather-forecast>
     </mat-card-content>
 </mat-card>
