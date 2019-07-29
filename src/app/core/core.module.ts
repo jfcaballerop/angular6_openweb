@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDividerModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { SharedModule } from '../shared/shared.module';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 
@@ -9,7 +10,8 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
     CommonModule,
     MatToolbarModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    SharedModule
   ],
   declarations: [TopMenuComponent, LeftMenuComponent],
   exports: [TopMenuComponent, LeftMenuComponent]

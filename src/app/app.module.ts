@@ -18,6 +18,7 @@ import { WeatherModule } from './weather/weather.module';
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }
