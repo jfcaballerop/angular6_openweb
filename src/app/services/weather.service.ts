@@ -1,22 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Weather } from '../weather/weather.model';
 import { Forecast } from '../weather/forecast.model';
+import { Weather } from '../weather/weather.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
 
-  private urlApi = 'http://api.openweathermap.org/data/2.5/weather?q='
-  private urlApiForecast = 'http://api.openweathermap.org/data/2.5/forecast?q='
+  private urlApi = 'http://api.openweathermap.org/data/2.5/weather?q=';
+  private urlApiForecast = 'http://api.openweathermap.org/data/2.5/forecast?q=';
   private cityQuery = 'Madrid,es';
   private addSymbol = '&';
   private appID = 'APPID=98921063bab96b2553d78ba98642169a';
-  // private ClientID = 'dj0yJmk9dVVsV01tS2t6RmwxJmQ9WVdrOVlsaFhkMmxCTmpJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWE3';
-  // private ClientSecret = 'fca0993cf7b5a53e694073e154a5839fc5edefaf';
-  // private apiKey = '98921063bab96b2553d78ba98642169a';
   constructor(
     private _http: HttpClient
   ) { }
