@@ -42,7 +42,7 @@ export class LoginCardComponent {
   }
 
   public loginSubmit() {
-
+    this._router.navigate([`/weather/info`]);
   }
 
   public activeBackground(withblur) {

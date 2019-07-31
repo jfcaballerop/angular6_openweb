@@ -4,6 +4,7 @@ import { MatDividerModule, MatListModule, MatToolbarModule } from '@angular/mate
 import { SharedModule } from '../shared/shared.module';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
+import { Routes, RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
     MatToolbarModule,
     MatListModule,
     MatDividerModule,
-    SharedModule
+    SharedModule,
+    RouterModule.forChild([])
   ],
   declarations: [TopMenuComponent, LeftMenuComponent],
   exports: [TopMenuComponent, LeftMenuComponent]
