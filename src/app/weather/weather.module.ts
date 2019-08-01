@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CoreModule } from '../core/core.module';
 import { LayoutModule } from '../layout/layout.module';
 import { WeatherService } from '../services/weather.service';
 import { SharedModule } from '../shared/shared.module';
@@ -19,6 +20,7 @@ import { WeatherSearchComponent } from './weather-search/weather-search.componen
   ],
   imports: [
     CommonModule,
+    CoreModule,
     SharedModule,
     WeatherRoutingModule,
     LayoutModule
