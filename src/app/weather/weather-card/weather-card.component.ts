@@ -21,7 +21,7 @@ export class WeatherCardComponent implements OnInit {
 
   ngOnInit() {
     this._activatedRoute.params.subscribe(params => {
-      this.cityName = <string>(params['cityName'] ? params['cityName'] : 'Madrid, ES');
+      this.cityName = <string> (params['cityName'] ? params['cityName'] : 'Madrid, ES');
       forkJoin(
         [
           this._weatherService.getWeatherInfo(this.cityName),
