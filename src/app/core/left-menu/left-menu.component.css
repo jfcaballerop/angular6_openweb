@@ -66,3 +66,7 @@
 
 
 /******************** FIN DROPDOWN *****************/
+:host /deep/ .mat-list-item.active {
+    background-color: #34579c;
+    color: #fafafa;
+}

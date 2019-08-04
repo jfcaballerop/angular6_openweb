@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { WeatherService } from 'src/app/services/weather.service';
 import { Weather } from '../weather.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-weather-card',
@@ -11,24 +12,33 @@ import { Weather } from '../weather.model';
 export class WeatherCardComponent implements OnInit {
 
   weather: Weather = new Weather();
+  cityName: string;
 
   constructor(
-    private _weatherService: WeatherService
+    private _weatherService: WeatherService,
+    private _activateRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    forkJoin(
-      [
-        this._weatherService.getWeatherInfo('Madrid, ES'),
-        this._weatherService.getForecastInfo('Madrid, ES')
-      ]
-    ).subscribe(
-      results => {
-        this.weather = this._weatherService.mapResult(results[0], results[1]);
-      },
-      error => {
-        alert(error.message);
+
+    this._activateRoute.params.subscribe(
+      params => {
+        this.cityName = <string>(params['cityName'] ? params['cityName'] : 'Madrid, ES');
+        forkJoin(
+          [
+            this._weatherService.getWeatherInfo(this.cityName),
+            this._weatherService.getForecastInfo(this.cityName)
+          ]
+        ).subscribe(
+          results => {
+            this.weather = this._weatherService.mapResult(results[0], results[1]);
+          },
+          error => {
+            alert(error.message);
+          }
+        );
       }
     );
+
   }
 }
