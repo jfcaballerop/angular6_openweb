@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class LeftMenuComponent implements OnInit {
   cities: Array<string> = new Array<string>();
 
+  cities: Array<string> = new Array<string>();
+
   constructor() { }
 
   ngOnInit() {

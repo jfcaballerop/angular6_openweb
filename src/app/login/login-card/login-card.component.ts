@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
       ])
   ]
 })
-export class LoginCardComponent {
+export class LoginCardComponent implements OnInit {
+
 
   backgrounds = [
     { main: 'https://drive.google.com/uc?id=1wsk0lus_UmgB1x7YBHZ30PHhd59oI_QJ', blur: 'https://drive.google.com/uc?id=13sGmUKF193j2BDrvOtAuGMV27mEe5HSE' },
@@ -33,6 +35,10 @@ export class LoginCardComponent {
   user = '';
   password = '';
 
+  loginFormGroup: FormGroup;
+
+
+
   constructor(
     private _router: Router,
 
@@ -41,10 +47,17 @@ export class LoginCardComponent {
     setInterval(() => { this._onChangeBackground(); }, 600 * this.secondsToChange);
   }
 
-  public loginSubmit() {
-    this._router.navigate([`/weather/search`]);
+  ngOnInit() {
+    this.loginFormGroup = new FormGroup({
+      user: new FormControl('',[Validators.required, Validators.email]),
+      password: new FormControl('',[Validators.required, Validators.minLength(4)])
+    });
   }
 
+  public loginSubmit(loginGroup: FormGroup) {
+    console.log(this.loginFormGroup.value, this.loginFormGroup.valid);
+    this._router.navigate([`/weather/search`]);
+  }
   public activeBackground(withblur) {
     this.showBackgroundImage = false;
     let back = this.backgrounds[this.backgroundIndex].main;

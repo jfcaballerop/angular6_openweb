@@ -20,19 +20,12 @@ export class WeatherService {
 
   public getWeatherInfo(cityName: string): Observable<any> {
     const url = `${this.urlApi}${cityName}${this.addSymbol}${this.appID}`;
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'OAuth',
-    //     'oauth_consumer_key': "YOUR_CONSUMER_KEY",
-    //   })
-    // };
 
     return this._http.get(url);
   }
 
   public getForecastInfo(cityName: string): Observable<any> {
-    const url = `${this.urlApiForecast}${this.cityQuery}${this.addSymbol}${this.appID}`;
+    const url = `${this.urlApiForecast}${cityName}${this.addSymbol}${this.appID}`;
 
     return this._http.get(url);
   }
